@@ -60,3 +60,7 @@ function followTheCommand() {
     }
 }
 
+button.addEventListener("click", event => {
+    followTheCommand();
+});
+

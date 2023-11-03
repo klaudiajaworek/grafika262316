@@ -1,0 +1,16 @@
+#myHeader {
+    text-align: center;
+}
+
+#myCanvas {
+    display: block;
+    margin: 0 auto;
+    background-color: #f0f0f0;
+    border: 2px solid #d0d0d0;
+}
+
+#myInput {
+    display: block;
+    margin: auto; 
+    margin-bottom: 1%; 
+}
