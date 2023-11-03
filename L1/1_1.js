@@ -35,15 +35,23 @@ class Turtle {
         this.drawing = false;
     }
 
-    drawPolygon(n, lineLength, colors = ["#581845", "#900c3f", "#c70039", "#ff5733", "#ffc30f"]) {
-        var alpha = (n-2) * 180 / n;
-        this.angle = (180 - alpha)*Math.PI/180;
+    drawPolygon(n, lineLength, colors = ["#00798c", "#d1495b", "#edae49", "#66a182", "#2e4057", "#581845", "#FF5733"]) {
+        var internalAngle = (n-2) * 180 / n;
         this.context.strokeStyle = colors[Math.floor(Math.random()*colors.length)];
         this.context.lineWidth = 2
-        for (let i = 0; i < n; i++) {
-            this.forward(lineLength);
-            this.turn(180 - alpha);
+        for (let i = 0; i <= n; i++) {
+            if (i == 0) {
+                this.forward(lineLength/2);
+                this.turn(180 - internalAngle);
+            } else if (i == n) {
+                this.forward(lineLength/2);
+            } else {
+                this.forward(lineLength);
+                this.turn(180 - internalAngle);
+            }
         }
+        this.context.fillStyle = "#efefef";
+        this.context.fill();
     }
 }
 
@@ -51,7 +59,10 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var maxX = canvas.width;
 var maxY = canvas.height;
-const myTurtle = new Turtle(ctx, 0.6 * maxX, 0.9 * maxY);
-for (let i = 3; i < 9; i++) {
-    myTurtle.drawPolygon(i, 200);
+
+const myTurtle = new Turtle(ctx, 0.5 * maxX, 0.9 * maxY);
+
+var maxN = 12;
+for (let i = 3; i <= maxN; i++) {
+    myTurtle.drawPolygon(i, 0.8 * maxY * Math.sin(Math.PI/maxN));
 }
