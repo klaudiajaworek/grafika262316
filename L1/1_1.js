@@ -50,8 +50,6 @@ class Turtle {
                 this.turn(180 - internalAngle);
             }
         }
-        this.context.fillStyle = "#efefef";
-        this.context.fill();
     }
 }
 
