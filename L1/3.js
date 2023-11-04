@@ -6,7 +6,7 @@ class Turtle {
         this.y = y;
         this.angle = angle;
         this.drawing = true;
-        this.points = [];
+        this.vertices = [];
     }
 
     forward(distance) {
@@ -42,13 +42,13 @@ class Turtle {
             if (i == 0) {
                 this.forward(lineLength/2);
                 this.turn(180 - internalAngle);
-                this.points.push({x: this.x, y: this.y});
+                this.vertices.push({x: this.x, y: this.y});
             } else if (i == n) {
                 this.forward(lineLength/2);
             } else {
                 this.forward(lineLength);
                 this.turn(180 - internalAngle);
-                this.points.push({x: this.x, y: this.y});
+                this.vertices.push({x: this.x, y: this.y});
             }
         }
     }
@@ -60,8 +60,8 @@ class Turtle {
         this.context.strokeStyle = color;
         this.context.lineWidth = 2;
         this.drawPolygon(n, 0.8 * maxY * Math.sin(Math.PI/n));
-        for (let point of this.points) {
-            let others = this.points.filter(x => x != point);
+        for (let point of this.vertices) {
+            let others = this.vertices.filter(x => x != point);
             for (let other of others) {
                 this.context.beginPath();
                 this.context.moveTo(point.x, point.y);
@@ -69,7 +69,7 @@ class Turtle {
                 this.context.stroke();
             }
         }
-        this.points = [];
+        this.vertices = [];
     }
 
     drawBipartiteGraph(n, m, color) {
@@ -83,15 +83,15 @@ class Turtle {
         for (let i = 0; i < m; i++) {
             lowerSet.push({x: (i+1)/(m+1) * maxX, y: 0.8 * maxY});
         }
-        for (let upperPoint of upperSet) {
-            for (let lowerPoint of lowerSet) {
+        for (let upperVertex of upperSet) {
+            for (let lowerVertex of lowerSet) {
                 this.context.beginPath();
-                this.context.moveTo(upperPoint.x, upperPoint.y);
-                this.context.lineTo(lowerPoint.x, lowerPoint.y);
+                this.context.moveTo(upperVertex.x, upperVertex.y);
+                this.context.lineTo(lowerVertex.x, lowerVertex.y);
                 this.context.stroke();
             }
         }
-        this.points = [];
+        this.vertices = [];
     }
 }
 
