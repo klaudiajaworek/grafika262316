@@ -1,9 +1,9 @@
-function drawElipseNaive(context, x0, y0, a, b) {
+function drawElipseNaive(context, x0, y0, a, b, step) {
     var x = x0 - a;
     var y = y0;
     context.fillRect(x, y, 1, 1);
     while (x < x0 + a) {
-        x += 1;
+        x += step;
         var dy = b * Math.sqrt(1 - ((x - x0) / a)**2)
         context.fillRect(x, y0 + dy, 1, 1);
         context.fillRect(x, y0 - dy, 1, 1);
@@ -68,27 +68,18 @@ var bresenhamCanvas = document.getElementById("bresenhamCanvas");
 var naiveCtx = naiveCanvas.getContext("2d");
 var bresenhamCtx = bresenhamCanvas.getContext("2d");
 
-var naiveTimes = [];
-var bresenhamTimes = [];
-
-for (let i = 0; i < 100; i++) {
-    var startTime = performance.now();
-    drawElipseNaive(naiveCtx, naiveCanvas.width / 2, naiveCanvas.height / 2, 200, 150, step=0.01);
-    var endTime = performance.now();
-    naiveTimes.push(endTime - startTime);
-}
+var startTime = performance.now();
+drawElipseNaive(naiveCtx, naiveCanvas.width / 2, naiveCanvas.height / 2, 200, 150, 0.01);
+var endTime = performance.now();
 
 naiveCtx.font = "15px Arial";
-naiveCtx.fillText(`Algorytm naiwny: ${naiveTimes.reduce((a, b) => a + b, 0) / 100} ms`, 20, 20);
+naiveCtx.fillText(`Algorytm naiwny: ${endTime - startTime} ms`, 20, 20);
 
-for (let i = 0; i < 100; i++) {
-    startTime = performance.now();
-    drawElipseBresenham(bresenhamCtx, bresenhamCanvas.width / 2, bresenhamCanvas.height / 2, 200, 150);
-    endTime = performance.now();
-    bresenhamTimes.push(endTime - startTime);
-}
+startTime = performance.now();
+drawElipseBresenham(bresenhamCtx, bresenhamCanvas.width / 2, bresenhamCanvas.height / 2, 200, 150);
+endTime = performance.now();
 
 bresenhamCtx.font = "15px Arial";
-bresenhamCtx.fillText(`Algorytm Bresenhama: ${bresenhamTimes.reduce((a, b) => a + b, 0) / 100} ms`, 20, 20);
+bresenhamCtx.fillText(`Algorytm Bresenhama: ${endTime - startTime} ms`, 20, 20);
 
 
