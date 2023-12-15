@@ -1,0 +1,12 @@
+#myHeader {
+    text-align: center;
+}
+
+#myCanvas {
+    display: block;
+    grid-column: 1;
+    margin: auto;
+    background-color: #f0f0f0;
+    border: 2px solid #d0d0d0;
+}
+
